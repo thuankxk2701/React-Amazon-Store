@@ -1,24 +1,39 @@
 import React from "react";
 import "./Product.css";
-
-const Product = () => {
+import { useStateValue } from "../../StateProvider";
+import { ADD_TO_BASKET } from "../../types";
+const Product = ({ title, image, price, rating, id }) => {
+  const [state, dispatch] = useStateValue();
+  const handleAddToBasket = () => {
+    dispatch({
+      type: ADD_TO_BASKET,
+      item: {
+        id,
+        title,
+        image,
+        price,
+        rating,
+      },
+    });
+  };
   return (
     <div className="product">
       <div className="product_info">
-        <p>The lean startup</p>
+        <p>{title}</p>
         <p className="product__price">
           <small>$</small>
-          <strong>19.99</strong>
+          <strong>{price}</strong>
         </p>
         <div className="product__rating">
-          <p>⭐</p>
+          {Array(rating)
+            .fill()
+            .map((_, i) => (
+              <p>⭐</p>
+            ))}
         </div>
       </div>
-      <img
-        src="https://images-na.ssl-images-amazon.com/images/I/51Zymoq7UnL._SX325_BO1,204,203,200_.jpg"
-        alt="img"
-      />
-      <button> Add to Basket</button>
+      <img src={image} alt="img" />
+      <button onClick={handleAddToBasket}> Add to Basket</button>
     </div>
   );
 };
