@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import Checkout from "./components/Checkout/Checkout";
 import Login from "./components/Login/Login";
 import Payment from "./components/Payment/Payment";
+import Orders from "./components/Order/Orders";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { SET_USER } from "./types";
@@ -12,9 +13,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 import { Routes, Route } from "react-router-dom";
+
 const promise = loadStripe(
   "pk_test_51KMVvJBQaKWgNKgOY470N4g5UUdNcy8zxHvvOFYYJD9j9KgBl9AVaD7qgiDtgx8iWLyXYDHfzcxBZERtz5OeX9oj00YN07vP7j",
 );
+
 const App = () => {
   const [{}, dispatch] = useStateValue();
   useEffect(() => {
@@ -51,6 +54,15 @@ const App = () => {
             <>
               <Header />
               <Checkout />
+            </>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <>
+              <Header />
+              <Orders />
             </>
           }
         />

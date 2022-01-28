@@ -1,11 +1,8 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(
-  "sk_test_51KMVvJBQaKWgNKgOIKx57UXleeV1NptrcI4y5vHZTk1jp6KbNOMlUeA57AaR6sXxh1BCfCkLP73dhfIaDaakGNlP00VsvUpxlI",
-);
-
-// API
+const  stripe =require('stripe')(
+  "sk_test_51KMVvJBQaKWgNKgOIKx57UXleeV1NptrcI4y5vHZTk1jp6KbNOMlUeA57AaR6sXxh1BCfCkLP73dhfIaDaakGNlP00VsvUpxlI");
 
 // - App config
 const app = express();
@@ -26,15 +23,13 @@ app.post("/payments/create", async (request, response) => {
     amount: total, // subunits of the currency
     currency: "usd",
   });
-
   // OK - Created
   response.status(201).send({
     clientSecret: paymentIntent.client_secret,
   });
 });
 
-// - Listen command
 exports.api = functions.https.onRequest(app);
 
 // Example endpoint
-// http://localhost:5001/amaznclone-v1/us-central1/api.
+// http://localhost:5001/challenge-6f867/us-central1/api
